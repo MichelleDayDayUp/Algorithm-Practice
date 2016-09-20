@@ -1,0 +1,24 @@
+Problem description: https://code.google.com/codejam/contest/6274486/dashboard#s=p1
+Given a 0/1 matrix, grid[R][C], which include R rows and C columns, e.g.
+
+0 0 0
+0 1 0
+1 0 0
+1 0 0
+0 0 0
+
+We need to count how many squares contained in this matrix which only includ 0s. 
+So the first thing we should consider is how we should count the 0 squares, so that 
+every square will be counted without repeat.
+One method is for each point, grid[i][j], in the grid, we count how many sqares 
+are there whose right-bottom point is grid[i][j], and then calcuate the sum of 
+every point in the matrix; In order to implement idea, we need to find the maxmum 
+square whose right-bottom point is grid[i][j], and if the length of this sqaure's 
+edge is X, there are totally X squares whose right-bottom point locates at grid[i][j]. 
+So in order to calculate the size of the maximum square located at grid[i][j], which 
+we can denote is as s[i][j], we can find a relation that: 
+
+s[i][j] = min(s[i-1][j-1], s[i-1][j], s[i][j-1) + 1;
+
+therefore the algorithm of this solving this problem is quite obvious, and we can use
+DP to solve it.

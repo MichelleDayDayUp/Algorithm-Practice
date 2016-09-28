@@ -1,0 +1,24 @@
+The problem description can be found from the following URL:
+
+https://www.hackerrank.com/contests/101hack41/challenges/washing-plates
+
+The possible solutions are provided here:
+
+The first one is dp,
+
+we can use an array m[i][j] to represent the maxmum money Harold can get by washing j plates selected from 0-i plates;
+so we have m[i][j] = max(m[i-1][j] - d[i], m[i-1][j-1] + p[i]; the time complexity of this solution is O(N*K), and the 
+space complexity is also O(N*K), by observing that m[i][j] is only related to m[i-1][j] and m[i-1][j-1], the space
+complexity of this method can be optimized to O(K), but thie time complexity cannot be optimized. So if N*K is large,
+large testcases will fail.
+
+Therefore, we should consider some other solutions, we can find that the result can be represented as the following fomula:
+
+money = p[x1] + p[x2] + p[x3] + ... + p[xi] - d[y1] - d[y2] - ... - d[yj];
+if X = {x1,x2,...,xi};
+Y = {y1, y2, ...,yj};
+X and Y don't have common elements;
+
+so we can first sum all d[i],  e.g. initSum = -d[1] - d[2] - ...-d[n];
+and for a i-th plate , if Harold wash it, he can get the money: initSum + p[i] + d[i], therefore, we can sort all p[i] + d[i] 
+and pick K plates with largest p[i]+d[i], the time complexity of this method is O(NlgN), which is much better than O(NK);

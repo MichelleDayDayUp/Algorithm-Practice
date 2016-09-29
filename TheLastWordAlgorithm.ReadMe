@@ -1,0 +1,29 @@
+The problem description can be found from the following URL:
+
+https://code.google.com/codejam/contest/4304486/dashboard#s=p0
+ 
+when given a string S,  e.g. AMKIHGFDCBAMEJL,  in order to generate the last word as defined in the
+problem description, we have two considerations, the first one is characters should be put in the
+result string in descinding order, but since the host will present the characters in the order of
+occuring in the original string from left to right, and if we represent the first character in S
+as S0, since the contestant can choose to put each character at the begining or ending of the word, 
+we can find the characters which are located at the left of S0 are placed in the reverse order
+as they have occured in S, and the characters which are located at the right places of S0 will
+keep their relative positions as in S, e.g.
+if the S is:
+S0 S1 S2 ... Si...Si+t...Si+t+k...Sn
+in result string should be like this,
+Si+t+k+x ... Si+t Si S0 ... Si Si+1 Si+t-1 ... Si+t+k-1 Si+t+k+1 ... Sn
+where n-k, n-k-t,...,6,4,0... are the indices of these characters in S,
+therefore, if we can make Si+t+k ... Si+t Si are in descending order, Si+t+k is the largest character 
+from S1-Sn, 
+
+S0 S1 S2 S3 S4 ... S5 S6 ... Sj ... Si Si+1 ... Sn
+
+S0' S1' S2' ... Sx' ... Sy' ... Sn'
+
+According to above analysis, S0' is the largest character from S1 to Sn, and if the index of S0'
+in S is i, S1' is the largest character from S1 to Si-1, and so on.
+
+Therefore we can use a stack help us find S0' S1' ..., and what we need to do is to scan S from ending
+to start, and keep the characters in the stack in descending order.
